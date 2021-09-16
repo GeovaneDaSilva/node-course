@@ -10,5 +10,4 @@ dotenv()
 middlewares(app)
 routes(app)
 
-
 export default app

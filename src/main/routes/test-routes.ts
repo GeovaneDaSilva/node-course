@@ -14,7 +14,6 @@ export default (router: Router): void => {
             ok: true,
             msg: 'everthing is ok 2!',
             body: `name: ${name}, email: ${email}`
-
         })
     })
 }
