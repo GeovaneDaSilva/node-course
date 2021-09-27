@@ -27,7 +27,9 @@ export class RegisterUserAccountController implements Controller {
                 return badRequest( new InvalidParamError(email))
             }
 
-            // Verify password confirmation 
+            if (password !== passwordConfirmation) {
+                return badRequest(new InvalidParamError('passwordConfirmation'))
+            }
 
             // Verify if exist account  = implemente repository
 
