@@ -17,7 +17,7 @@ export class RegisterUserAccountController implements Controller {
                     return badRequest( new MissingParamError(field))
                 }
             }
-            // Verify if email is valid
+            
 
             // Verify password confirmation 
 
