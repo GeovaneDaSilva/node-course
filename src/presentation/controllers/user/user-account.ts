@@ -4,6 +4,7 @@ import { IAddAccount } from '../../../domain/useCases/account/add-user-account'
 import { badRequest, serverError, success } from '../../interfaces/protocols/http-response'
 import { MissingParamError } from '../../errors/missing-param-error'
 import { IEmailValidator } from '../../../services/email-validator-adapter'
+import { InvalidParamError } from '../../errors/invalid-param-error'
 
 export class RegisterUserAccountController implements Controller {
     constructor(private readonly iAddAccount: IAddAccount, private readonly iEmailValidator: IEmailValidator) {
@@ -23,9 +24,9 @@ export class RegisterUserAccountController implements Controller {
             const isValid = this.iEmailValidator.isValid(email)
             
             if (!isValid) {
-                return badRequest( new MissingParamError(email))
+                return badRequest( new InvalidParamError(email))
             }
-            
+
             // Verify password confirmation 
 
             // Verify if exist account  = implemente repository
