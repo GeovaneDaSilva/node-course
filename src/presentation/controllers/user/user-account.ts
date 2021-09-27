@@ -3,10 +3,12 @@ import { Controller } from './../../interfaces/protocols/controller'
 import { IAddAccount } from '../../../domain/useCases/account/add-user-account'
 import { badRequest, serverError, success } from '../../interfaces/protocols/http-response'
 import { MissingParamError } from '../../errors/missing-param-error'
+import { IEmailValidator } from '../../../services/email-validator-adapter'
 
 export class RegisterUserAccountController implements Controller {
-    constructor(private readonly iAddAccount: IAddAccount) {
+    constructor(private readonly iAddAccount: IAddAccount, private readonly iEmailValidator: IEmailValidator) {
         this.iAddAccount = iAddAccount
+        this.iEmailValidator = iEmailValidator
     }
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
         try {            
@@ -18,7 +20,12 @@ export class RegisterUserAccountController implements Controller {
                 }
             }
             
-
+            const isValid = this.iEmailValidator.isValid(email)
+            
+            if (!isValid) {
+                return badRequest( new MissingParamError(email))
+            }
+            
             // Verify password confirmation 
 
             // Verify if exist account  = implemente repository
