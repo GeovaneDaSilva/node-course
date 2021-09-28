@@ -7,6 +7,6 @@ export const makeRegisterUserAccountController = (): RegisterUserAccountControll
     const userMongoRepository = new UserMongoRepository()
     const dbAddAccount = new DbAddAccount(userMongoRepository)
     const emailValidatorAdapter = new EmailValidatorAdapter()
-    const registerUserAccount = new RegisterUserAccountController(dbAddAccount, emailValidatorAdapter)
+    const registerUserAccount = new RegisterUserAccountController(dbAddAccount, emailValidatorAdapter, userMongoRepository)
     return registerUserAccount
 }
