@@ -10,8 +10,10 @@ export class UserMongoRepository implements IUserRepository{
         return collectionMap
     }
 
-    async getOne ( email: string): Promise<UserAccount> {
-        const collection: UserAccount | any = await User.findOne( { email: email })
-        return collection
+    async getOne ( email_key: string): Promise<UserAccount> {
+        const collection: UserAccount | any = await User.findOne( { email: email_key })
+        const { _id, email, role } = collection
+        const collectionMap: UserAccount | any = { id: _id, email, role}
+        return collectionMap
     }
 }
