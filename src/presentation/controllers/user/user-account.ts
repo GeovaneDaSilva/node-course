@@ -14,7 +14,6 @@ export class RegisterUserAccountController implements Controller {
         private readonly iUserRepository: IUserRepository) {
         this.iAddAccount = iAddAccount
         this.iEmailValidator = iEmailValidator
-        this.iUserRepository = iUserRepository
     }
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
         try {            
@@ -37,9 +36,6 @@ export class RegisterUserAccountController implements Controller {
             }
             
             const existUserAccount = await this.iUserRepository.getOne(email)
-
-            return console.log(existUserAccount)
-            
             if(existUserAccount) {
                 return unauthorized(new ReadyExist(email))
             }
